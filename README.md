@@ -1,3 +1,9 @@
+## What is this?
+
+This app was created for the Andela Learning Community Phase 2 Cloud Track challenge. You can find the running app at -
+
+## Other information
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
