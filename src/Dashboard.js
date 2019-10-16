@@ -1,7 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -10,6 +17,7 @@ const useStyles = makeStyles(theme => ({
     },
     flex: {
         display: 'flex',
+        alignItems: 'center',
     },
     button: {
         width: '15%',
@@ -33,6 +41,10 @@ export default function Dashboard(){
 
     const classes = useStyles();
 
+    const [textValue, changeTextValue] = React.useState(
+        ''
+    );
+
     return(
         <div>
         <Paper className={classes.root}>
@@ -44,14 +56,49 @@ export default function Dashboard(){
             </Typography>
             <div className={classes.flex}>
                 <div className={classes.topicsWindow}>
+                    <List>
+                        {
+                            ['topic'].map(topic => (
+                                <ListItem key={topic} button>
+                                <ListItemText primary={topic} />
+                                </ListItem>
 
+                            ))
+                        }
+                    
+                    </List>
                 </div>
                 <div className={classes.chatWindow}>
+                    
+                        {
+                            [{from: 'user', msg: 'hello'}].map((chat, i) => (
+                                <div className={classes.flex} key={i}>
+                                        <Chip label={chat.from} variant="outlined" className={classes.chip}/>
 
+                                        <Typography variant = 'p'>{chat.msg}</Typography>
+
+                                </div>
+
+                            ))
+                        }
+                    
+                    
                 </div>
             </div>
             <div className={classes.flex}>
-                
+
+                    <TextField
+                        
+                        label="Chat entered here"
+                        className={classes.chatBox}
+                        value={textValue}
+                        onChange={changeTextValue('name')}
+                        margin="normal"
+                    />
+
+                <Button variant="contained" color="primary" className={classes.button}>
+                    Send
+                </Button>
             </div>
             <Typography variant="caption" display="block" gutterBottom>
                 Mustapha Muhammad Garba, 2019
