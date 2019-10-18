@@ -7,8 +7,9 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Chip from "@material-ui/core/Chip";
 import Button from "@material-ui/core/Button";
-
 import TextField from "@material-ui/core/TextField";
+
+import {CTX} from './Store' 
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,7 +38,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function Dashboard() {
+
+
   const classes = useStyles();
+
+  //CTX Store here
+
+  const [allChats]  = React.useContext(CTX);
+  const topics = Object.keys(allChats);
 
   const [textValue, changeTextValue] = React.useState("");
 
@@ -69,7 +77,7 @@ export default function Dashboard() {
                   className={classes.chip}
                 />
 
-                <Typography variant="p">{chat.msg}</Typography>
+                <Typography variant="body1" gutterBottom>{chat.msg}</Typography>
               </div>
             ))}
           </div>

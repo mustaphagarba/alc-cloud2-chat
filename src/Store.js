@@ -2,7 +2,7 @@ import React from 'react';
 import { checkPropTypes } from 'prop-types';
 
 
-const CTX = React.createContext();
+export const CTX = React.createContext();
 
 /*
     msg { 
@@ -23,20 +23,32 @@ const CTX = React.createContext();
 
 */
 
+const initState = {
+    general:     [
+        {from: 'Mustapha', msg: 'Ohayo gozaimasu!'},
+        {from: 'Ahmad', msg: 'Ahlan wa sahlan bikum.'},
+        {from: 'Ladidi', msg: 'Barkan ku dai'},
+        
+    ],
+    topic2: [
+        {from: 'Mustapha', msg: 'Ohayo gozaimasu!'},
+        {from: 'Mustapha', msg: 'Ohayo gozaimasu!'},
+        {from: 'Mustapha', msg: 'Ohayo gozaimasu!'},
+
+    ]
+
+}
+
 function reducer(state, action){
     const {from, msg, topic} = action.payload;
     switch(action.type){
         case 'RECEIVE MESSAGE' :
             return {
                 ...state,
-                [action.payload.topic]:     {
-                    ...state[topic].
-                    {
-                        from:   action.payload.from,
-                        msg:    action.payload.msg
-
-                    }
-                }
+                [topic]:     [
+                    ...state[topic],
+                    {from, msg}
+                ]
 
             }
         default :
@@ -49,7 +61,7 @@ export default function Store(props) {
     const reducerHook = React.useReducer(reducer, initState);
     
     return(
-        <CTX.Provider value = {}>
+        <CTX.Provider value = {reducerHook}>
             {props.children}
         </CTX.Provider>
     )
